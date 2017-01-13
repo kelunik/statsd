@@ -6,12 +6,14 @@ class StatsD {
     private $socket;
     private $server;
     private $port;
+    private $labelPrefix;
     private $timers;
 
-    public function __construct(string $server, int $port) {
+    public function __construct(string $server, int $port, string $labelPrefix = "") {
         $this->socket = \socket_create(\AF_INET, \SOCK_DGRAM, \SOL_UDP);
         $this->server = $server;
         $this->port = $port;
+        $this->labelPrefix = $labelPrefix;
     }
 
     public function escape(string $label) {
@@ -19,12 +21,12 @@ class StatsD {
     }
 
     public function increment(string $label) {
-        $message = "kvk.view-title.{$label}:1|c";
+        $message = "{$this->labelPrefix}{$label}:1|c";
         socket_sendto($this->socket, $message, strlen($message), 0, $this->server, $this->port);
     }
 
     public function timing(string $label, float $ms) {
-        $message = "kvk.view-title.{$label}:{$ms}|ms";
+        $message = "{$this->labelPrefix}{$label}:{$ms}|ms";
         socket_sendto($this->socket, $message, strlen($message), 0, $this->server, $this->port);
     }
 
