@@ -1,0 +1,17 @@
+{
+    "name": "kelunik/statsd",
+    "description": "Simple StatsD Client.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Niklas Keller",
+            "email": "me@kelunik.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Kelunik\\StatsD\\": "src"
+        }
+    }
+}
