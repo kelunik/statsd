@@ -43,7 +43,7 @@ class StatsD {
         unset($this->timers[$label]);
     }
 
-	public function __destruct() {
-		\socket_close($this->socket);
-	}
+    public function __destruct() {
+        \socket_close($this->socket);
+    }
 }
