@@ -25,6 +25,11 @@ class StatsD {
         socket_sendto($this->socket, $message, strlen($message), 0, $this->server, $this->port);
     }
 
+    public function gauge(string $label, int $value) {
+        $message = "{$this->labelPrefix}{$label}:{$value}|g";
+        socket_sendto($this->socket, $message, strlen($message), 0, $this->server, $this->port);
+    }
+
     public function timing(string $label, float $ms) {
         $message = "{$this->labelPrefix}{$label}:{$ms}|ms";
         socket_sendto($this->socket, $message, strlen($message), 0, $this->server, $this->port);
